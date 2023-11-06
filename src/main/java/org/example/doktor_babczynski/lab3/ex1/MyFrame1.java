@@ -1,12 +1,12 @@
-package org.example.doktor_babczynski.lab3.tutorial;
+package org.example.doktor_babczynski.lab3.ex1;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MyFrame extends JFrame implements ActionListener {
-    private JPanel jPanel = new JPanel(new FlowLayout());
+public class MyFrame1 extends JFrame implements ActionListener {
+    private JPanel jPanel = new JPanel();
     private JLabel name;
     private JLabel surname;
     private JPasswordField password;
@@ -17,7 +17,7 @@ public class MyFrame extends JFrame implements ActionListener {
     private JTextArea showName;
     private JTextArea showSurname;
 
-    public MyFrame() {
+    public MyFrame1() {
 
 
         name = new JLabel("Name : ");
@@ -31,15 +31,15 @@ public class MyFrame extends JFrame implements ActionListener {
         showSurname = new JTextArea();
         showPassword = new JTextArea();
 
-        jPanel.add(name);
-        jPanel.add(jTextField1);
-        jPanel.add(surname);
-        jPanel.add(jTextField2);
-        jPanel.add(password);
-        jPanel.add(button);
-        jPanel.add(showName);
-        jPanel.add(showSurname);
-        jPanel.add(showPassword);
+        jPanel.add(name, BorderLayout.NORTH);
+        jPanel.add(jTextField1, BorderLayout.NORTH);
+        jPanel.add(surname, BorderLayout.NORTH);
+        jPanel.add(jTextField2, BorderLayout.NORTH);
+        jPanel.add(password, BorderLayout.NORTH);
+        jPanel.add(button, BorderLayout.CENTER);
+        jPanel.add(showName, BorderLayout.EAST);
+        jPanel.add(showSurname, BorderLayout.EAST);
+        jPanel.add(showPassword, BorderLayout.EAST);
 
 
         this.add(jPanel);
@@ -57,8 +57,8 @@ public class MyFrame extends JFrame implements ActionListener {
             String text = jTextField1.getText();
             showName.setText(text);
             String text1 = jTextField2.getText();
-            showName.setText(text1);
-            showName.setText(String.valueOf(password.getPassword()));
+            showSurname.setText(text1);
+            showPassword.setText(String.valueOf(password.getPassword()));
 //            jPanel.add(showName, BorderLayout.SOUTH);
 //            jPanel.add(showSurname, BorderLayout.SOUTH );
 //            jPanel.add(showPassword,  BorderLayout.SOUTH);
