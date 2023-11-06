@@ -1,4 +1,4 @@
-package org.example;
+package org.example.doktor_babczynski.lab2;
 
 import java.util.Objects;
 
