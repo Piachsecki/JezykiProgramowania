@@ -19,6 +19,6 @@ public class MyFrame3 extends JFrame {
 
         JOptionPane.showMessageDialog(this, String.format("Hello %s", name));
 
-
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 }
