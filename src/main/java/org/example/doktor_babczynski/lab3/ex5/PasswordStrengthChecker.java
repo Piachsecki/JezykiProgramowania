@@ -26,7 +26,6 @@ public class PasswordStrengthChecker extends JFrame implements ActionListener {
         add(passwordField);
         add(checkButton);
 
-        // Dodaj obsługę zdarzeń dla przycisku
         checkButton.addActionListener(this);
 
     }
@@ -64,7 +63,6 @@ public class PasswordStrengthChecker extends JFrame implements ActionListener {
             strength++;
         }
 
-        // Wyświetl wynik na interfejsie
         String resultMessage = "Password Strength: " + strength + "/5";
         JOptionPane.showMessageDialog(this, resultMessage, "Result", JOptionPane.INFORMATION_MESSAGE);
     }
