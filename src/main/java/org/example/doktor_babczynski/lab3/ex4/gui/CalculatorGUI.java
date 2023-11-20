@@ -27,14 +27,15 @@ public class CalculatorGUI extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
-        calculationService = new CalculationService();
         setLayout(springLayout);
+        calculationService = new CalculationService();
 //        setVisible(true);
+
+        addGuiComponents();
     }
 
     public void addGuiComponents(){
         addDisplayFields();
-
         addButtons();
 
     }
@@ -124,51 +125,55 @@ public class CalculatorGUI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String buttonCommand = e.getActionCommand();
-        if (buttonCommand.matches("[0-9]")){
-            if (pressedEquals || pressedOperator || displayField.getText().equals("0"))
+        if(buttonCommand.matches("[0-9]")){
+            if(pressedEquals || pressedOperator || displayField.getText().equals("0"))
                 displayField.setText(buttonCommand);
             else
                 displayField.setText(displayField.getText() + buttonCommand);
 
+            // update flags
             pressedOperator = false;
             pressedEquals = false;
-        }else if (buttonCommand.equals("=")){
+        }else if(buttonCommand.equals("=")){
+            // calculate
             calculationService.setNum2(Double.parseDouble(displayField.getText()));
-            double result = 0;
 
-            switch (calculationService.getMathematicalSymbol()){
+            double result = 0;
+            switch(calculationService.getMathematicalSymbol()){
                 case '+':
                     result = calculationService.add();
                     break;
                 case '-':
                     result = calculationService.subtract();
                     break;
-                case 'x':
-                    result = calculationService.multiply();
-                    break;
                 case '/':
                     result = calculationService.divide();
                     break;
+                case 'x':
+                    result = calculationService.multiply();
+                    break;
             }
 
+            // update the display field
             displayField.setText(Double.toString(result));
+
+            // update flags
             pressedEquals = true;
             pressedOperator = false;
 
-        } else if (buttonCommand.equals(".")) {
-            if(displayField.getText().contains(".")){
+        }else if(buttonCommand.equals(".")){
+            if(!displayField.getText().contains(".")){
                 displayField.setText(displayField.getText() + buttonCommand);
             }
-        }else {
-            if (!pressedOperator)
+        }else{ // operator
+            if(!pressedOperator)
                 calculationService.setNum1(Double.parseDouble(displayField.getText()));
+
+            calculationService.setMathematicalSymbol(buttonCommand.charAt(0));
+
+            // update flags
+            pressedOperator = true;
+            pressedEquals = false;
         }
-
-        calculationService.setMathematicalSymbol(buttonCommand.charAt(0));
-
-        pressedEquals = false;
-        pressedOperator = true;
-
-
     }
 }
